@@ -1,0 +1,22 @@
+#!/bin/sh
+set -e
+
+port="$1"; shift
+cmd="$@"
+if [ -z "$cmd" ] ; then cmd="AT" ; fi
+
+# https://forum.openwrt.org/t/bash-automated-flashing-openwrt-problem-with-tty-connection/58478
+exec 4<$port 5>$port
+stty -F "$port" raw -echo 115200 onlret
+
+set +e
+echo -n "$cmd"$'\r' >&5
+read x <&4
+STATUS=`echo "$x" | sed -e 's/\r//g'`
+while [ ! "$STATUS" == "OK" ] ; do
+	>&2 echo "$cmd: $STATUS"
+	sleep 0.1
+	echo -n "$cmd"$'\r' >&5
+	read x <&4
+	STATUS=`echo "$x" | sed -e 's/\r//g'`
+done
