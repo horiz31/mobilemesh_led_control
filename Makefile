@@ -16,4 +16,7 @@ install:
 	ssh root@$(IP) mkdir -p /usr/lib/lua/luci/model/cbi/ledcontrol
 	scp -r usr/lib/lua/luci/model/cbi/ledcontrol/* root@$(IP):/usr/lib/lua/luci/model/cbi/ledcontrol/.
 	scp -r www/luci-static/resources/* root@$(IP):/www/luci-static/resources/.
+	ssh root@$(IP) chmod +x /usr/sbin/mesh_monitor.sh
+	ssh root@$(IP) chmod +x /usr/sbin/mmcmd
+	ssh root@$(IP) chmod +x /etc/init.d/mesh_monitor
 	ssh root@$(IP) /etc/init.d/mesh_monitor enable
