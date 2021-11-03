@@ -6,7 +6,7 @@ default:
 	@echo "make IP=x.y.x.w install"
 
 copyin:
-	@for f in etc/init.d/* usr/sbin/* usr/lib/lua/luci/controller/* usr/lib/lua/luci/model/cbi/ledcontrol/* www/luci-static/resources/* ; do scp root@$(IP):/$$f $$f ; done
+	@for f in etc/init.d/* usr/sbin/* usr/lib/lua/luci/controller/* usr/lib/lua/luci/model/cbi/ledcontrol/* www/luci-static/resources/* ; do scp -o HostKeyAlgorithms=+ssh-rsa root@$(IP):/$$f $$f ; done
 
 install:
 	scp -o HostKeyAlgorithms=+ssh-rsa -r usr/sbin/* root@$(IP):/usr/sbin/.
