@@ -11,17 +11,23 @@ To install, ensure that the MM radio is powered on, connected to a LAN and the i
 By default the radio IP is `10.223.x.y` where x,y are the decimal equivalent of the last two hexadecimal digits of the MM serial number.  I.e. `H31-MM-DAED` will have a default IP of `10.223.218.237`. Be sure you can ping the radio before proceeding. 
 
 Use git to clone this repository to your pc:
-```git clone https://github.com/horiz31/mobilemesh_led_control.git
-cd mobilemsh_led_control```
+```
+git clone https://github.com/horiz31/mobilemesh_led_control.git
+```
 
 ### On Windows
 
 open Windows powershell at the folder you cloned above (in Windows explorer, hold shift-right click the directory and Open PowerShell Window Here)
-run `./install.bat 10.223.x.y`
+run 
+```
+./install.bat 10.223.x.y
+```
 
 ### On Linux
 
-run `make IP=10.223.x.y install` 
+```
+make IP=10.223.x.y install
+```
 
 ## Mesh Monitor
 
