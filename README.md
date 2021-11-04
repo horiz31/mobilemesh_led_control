@@ -6,9 +6,28 @@ In the scripts below, a file is placed in `/etc/init.d/` that has specific items
 
 ## Installation
 
-To install, ensure that the MM radio is powered on, connected to a LAN and the ip address is known.  By default the IP is `10.223.x.y` where x,y are the decimal equivalent of the last two hexadecimal digits of the MM serial number.  I.e. `H31-MM-DAED` will have a default IP of `10.223.218.237`.
+To install, ensure that the MM radio is powered on, connected to a LAN and the ip address is known. We recommend that the setup below be configured BEFORE you set a password on the radio. Otherwise you will have to type this password several times during the setup.
 
-Then, issue a `make IP=10.223.x.y install` to copy the scripts over to the radio and enable the scripts to execute on boot.
+By default the radio IP is `10.223.x.y` where x,y are the decimal equivalent of the last two hexadecimal digits of the MM serial number.  I.e. `H31-MM-DAED` will have a default IP of `10.223.218.237`. Be sure you can ping the radio before proceeding. 
+
+Use git to clone this repository to your pc:
+```
+git clone https://github.com/horiz31/mobilemesh_led_control.git
+```
+
+### On Windows
+
+open Windows powershell at the folder you cloned above (in Windows explorer, hold shift-right click the directory and Open PowerShell Window Here)
+run 
+```
+./install.bat 10.223.x.y
+```
+
+### On Linux
+
+```
+make IP=10.223.x.y install
+```
 
 ## Mesh Monitor
 
@@ -20,6 +39,8 @@ This script monitors the stations connected to the mesh and issues commands to t
   * `Inactive Stations`: Solid Yellow
 
 The principle of operation is to periodicaly call `iw dev wlan0 station dump` and parse the output to determine if any connected stations exist.  If there are none, no output is made.  If there are connected stations, they may active or inactive.  Stations appear to remain in the device database for approximately 5 min.  Since we desire as faster response than that, we need to interpret the inactive time from the station report (given in milliseconds).  If there any stations with activity less than *5 sec*, then we consider the mesh active and the LED should be GREEN.  If there are any stations, but none show activity then the LED should be YELLOW.  When the stations are removed and there are no stations in the list, the LED should flash YELLOW.
+
+If the LED flashes RED, then these files have not been successfully copied to the radio
 
 ### Files
 
