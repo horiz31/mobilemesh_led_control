@@ -24,4 +24,4 @@ install:
 	ssh -o HostKeyAlgorithms=+ssh-rsa root@$(IP) /etc/init.d/mesh_monitor enable
 	ssh -o HostKeyAlgorithms=+ssh-rsa root@$(IP) /etc/init.d/rpcd restart
 	@read -p "Enter desired Doodle password: " password; \
-	ssh -o HostKeyAlgorithms=+ssh-rsa root@$(IP) "echo -e '$$password\n$$password\n' | passwd"
+	ssh -o HostKeyAlgorithms=+ssh-rsa root@$(IP) "echo -e '$$password\n$$password\n' | passwd" > /dev/null
