@@ -13,6 +13,14 @@ set +e
 echo -n "$cmd"$'\r' >&5
 read x <&4
 STATUS=`echo "$x" | sed -e 's/\r//g'`
+
+if [ "$STATUS" == "RESET" ] ; then
+	>&2 echo "$cmd: $STATUS"
+	echo -n $'RESET_ACK\r' >&5
+	echo "reset detected, trigger firstboot and reboot"
+    firstboot -y
+	reboot
+fi 
  
 while [ ! "$STATUS" == "OK" ] ; do
 	>&2 echo "$cmd: $STATUS"

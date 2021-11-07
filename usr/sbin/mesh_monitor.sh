@@ -11,11 +11,14 @@ LOG() {
 }
 
 do_command() {
-	if [ "$CMD" != "$*" ] ; then
+	 if [ "$CMD" != "$*" ] ; then
 		CMD="$*"
 		LOG mmcmd $DEV $CMD
 		mmcmd $DEV $CMD
-	fi
+	 else
+	 	mmcmd $DEV "AT"
+	 fi
+
 }
 
 if [[ $(uci get ledcontrol.@ledcontrol[0].enabled) == 1 ]]; then

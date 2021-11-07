@@ -1,0 +1,17 @@
+{
+    "lesssuperuser": {
+            "description": "not quite as super user",
+            "read": {
+                    "ubus": {
+                            "session" : [ "access", "login" ],
+                            "iwinfo": [ "assoclist" ]
+                    }
+            },
+            "write": {
+                    "ubus": {
+                            "session" : [ "access", "login" ],
+                            "iwinfo": [ "assoclist" ]
+                    }
+            }
+    }
+}
